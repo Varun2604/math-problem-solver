@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import './FileUpload.css'
-
+import {Button} from 'react-bootstrap'
 class FileUpload extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +23,10 @@ class FileUpload extends Component {
     });
   }
 
+  handleSubmit(event) {
+    this.props.renderSecondView(this.state.file);
+  }
+
   render() {
     return (
       <div className="file-upload">
@@ -32,6 +36,7 @@ class FileUpload extends Component {
         <FileUploadContent 
         image={this.state.file}
         removeUpload={(e)=>this.removeUpload(e)} 
+        handleSubmit={(e)=>this.handleSubmit(e)} 
         />
       </div>
       );
@@ -72,8 +77,14 @@ class FileUploadContent extends Component {
         <div className="file-upload-content">
           <ImageThumb image={this.props.image} />
           <div className="image-title-wrap">
-            <button type="button" onClick={(e) => this.props.removeUpload(e)} 
-            className="remove-image">Remove <span className="image-title">Uploaded Image</span></button>
+            <Button variant="danger"  className="file-upload-btn"
+            onClick={(e) => this.props.removeUpload(e)}>
+              Remove
+            </Button>
+            <Button variant="success"  className="file-upload-btn"
+            onClick={(e) => this.props.handleSubmit(e)}>
+              Submit
+            </Button>
           </div>
         </div>
       );

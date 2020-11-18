@@ -1,6 +1,21 @@
-.front-jumbotron {
+.App .front-jumbotron {
     border: 1px solid white;
     border-radius: 100px;
     margin: 10px 10px;
     padding: 20px 35px;
+    background-color: #282C30;
+}
+
+.file-upload-image {
+    max-height: 200px;
+    max-width: 200px;
+    margin: auto;
+    padding: 0px 20px;
+}
+
+.front-jumbotron .logo {
+    display: inline-block;
+}
+.front-jumbotron h1 {
+    display : inline-block;
 }

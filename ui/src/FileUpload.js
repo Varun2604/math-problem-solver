@@ -24,7 +24,30 @@ class FileUpload extends Component {
   }
 
   handleSubmit(event) {
-    this.props.renderSecondView(this.state.file);
+    var formdata = new FormData();
+    formdata.append("file", this.state.file, "file");
+
+    var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow',
+      referrer: "about:client",
+      referrerPolicy: "no-referrer-when-downgrade", // no-referrer, origin, same-origin...
+      mode: "cors", // same-origin, no-cors
+      credentials: "same-origin", // omit, include
+    };
+    let self = this;
+    fetch("/parse_and_compute", requestOptions)
+      .then(response => response.text())
+      .then((result) => {
+        result = JSON.parse(result);
+        self.props.renderSecondView(self.state.file, 
+          result.data.parsed_data, 
+          result.data.computed_result);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });   
   }
 
   render() {

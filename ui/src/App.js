@@ -13,8 +13,8 @@ class App extends Component {
     };
   }
 
-  renderSecondView(file){
-    this.setState({ file });
+  renderSecondView(file, parsed_response, compute_response){
+    this.setState({ file, parsed_response, compute_response });
   }
 
   renderFirstView(){
@@ -27,9 +27,13 @@ class App extends Component {
     let {file} = this.state;
     const renderView = (()=> {
       if(!file){
-        return <FirstView renderSecondView={(f)=>{this.renderSecondView(f)}}/>
+        return <FirstView renderSecondView={
+          (f, parsed_response, compute_response)=>{
+            this.renderSecondView(f, parsed_response, compute_response)}
+          }/>
       } else{
-        return <SecondView image={this.state.file} renderFirstView={()=>{this.renderFirstView()}}/>
+        return <SecondView image={this.state.file} parsed_response={this.state.parsed_response} 
+        compute_response={this.state.compute_response} renderFirstView={()=>{this.renderFirstView()}}/>
       }
     })
     return (

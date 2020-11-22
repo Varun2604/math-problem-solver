@@ -10,17 +10,17 @@ def hello():
 
 @app.after_request
 def add_header(response):
-    response.headers['Content-Type'] = 'application/json'
+    response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5000'
     return response
 
 @app.route("/parse_and_compute", methods=["POST"])
-def pasre_and_compute():
+def parse_and_compute():
   # uploaded_file = request.files['file']
   # if uploaded_file.filename != '':
   #     uploaded_file.save(uploaded_file.filename)
   data = {
       "parsed_data" : "1 + 2",
-      "computed_redult" : "3"
+      "computed_result" : "3"
   }
   resp = {
     "message" : "Image Successfully parsed and computed"
@@ -49,3 +49,6 @@ def compute_feedback():
     return json.dumps({
     "message" : "Compute feedback duly noted"
     }), 200
+    
+# if __name__ == '__main__':
+#     app.run(debug=True, host='0.0.0.0')

@@ -6,11 +6,45 @@ import './SecondView.css';
 class SecondView extends Component {
     
     submitParsingFeedback(e){
-
+        var requestOptions = {
+            method: 'POST',
+            body: {
+                'feedback' : "some feedback"
+            },
+            redirect: 'follow'
+        };
+        let self = this;
+        fetch("/compute_feedback", requestOptions)
+        .then(response => response.text())
+        .then((result) => {
+            result = JSON.parse(result);
+            alert(result.message);
+        })
+        .catch((error) => {
+            console.log('error', error);
+            alert("Error while submitting feedback, please try again later.");
+        });  
     }
 
     submitComputationFeedback(e){
-
+        var requestOptions = {
+            method: 'POST',
+            body: {
+                'feedback' : "some feedback"
+            },
+            redirect: 'follow'
+        };
+        let self = this;
+        fetch("/parse_feedback", requestOptions)
+        .then(response => response.text())
+        .then((result) => {
+            result = JSON.parse(result);
+            alert(result.message);
+        })
+        .catch((error) => {
+            console.log('error', error);
+            alert("Error while submitting feedback, please try again later.");
+        });
     }
 
     render() {
@@ -38,7 +72,9 @@ class SecondView extends Component {
                             <Form>
                                 <Form.Group controlId="exampleForm.ControlTextarea1">
                                     <Form.Label>Parsed Value from Image</Form.Label>
-                                    <Form.Control as="textarea" rows={3} />
+                                        <Form.Control as="textarea" rows={6}>
+                                            {this.props.parsed_response}
+                                        </Form.Control>
                                     <Button variant="outline-danger" 
                                     onClick={(e)=>{this.submitParsingFeedback(e)}}>
                                         Submit Parsing feedback
@@ -50,7 +86,9 @@ class SecondView extends Component {
                             <Form>
                                 <Form.Group controlId="exampleForm.ControlTextarea1">
                                     <Form.Label>Result for Image</Form.Label>
-                                    <Form.Control as="textarea" rows={3} />
+                                        <Form.Control as="textarea" rows={6}>
+                                            {this.props.compute_response}
+                                        </Form.Control>
                                     <Button variant="outline-danger" 
                                     onClick={(e)=>{this.submitComputationFeedback(e)}}>
                                         Submit Computation feedback

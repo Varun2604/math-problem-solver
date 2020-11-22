@@ -1,0 +1,15 @@
+.render-file {
+    width: inherit;
+    height: inherit;
+    padding: 20px;
+    margin: 5px 0px;
+}
+
+.image-container {
+    border: 1px dashed white;
+    background-color: white;
+}
+
+.btn {
+    margin : 10px 0px;
+}

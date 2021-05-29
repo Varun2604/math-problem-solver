@@ -1,2 +1,2 @@
 # math-problem-solver
-A simple application which will solve all your math problems.
+A simple application which will solve all your math problem.
